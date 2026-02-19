@@ -64,6 +64,15 @@ void Level1::handleInput(float dt)
 void Level1::update(float dt)
 {
 	m_player.update(dt);
+
+	std::vector<GameObject>& level = *m_tileMap.getLevel();
+
+	for (auto& t : level) {
+		if (t.isCollider() && Collision::checkBoundingBox(m_player, t)) {
+			m_player.collisionResponse(t);
+		}
+
+	}
 	
 }
 
